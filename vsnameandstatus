@@ -1,0 +1,9 @@
+##### Generico - Onliner
+
+#####crear cuenta con Role tipo GUEST para consultas
+
+curl -sku yogui:tunas -X POST -H "Content-type: application/json"  -d "{\"command\":\"run\", \"utilCmdArgs\": \"-c 'tmsh show ltm virtual'\"}"  https://<ipcontroller>/mgmt/tm/util/bash | grep -oE 'Ltm::Virtual Server: [^ ]+|Availability\s+: [^ ]+' |sed -n '/^Ltm::Virtual Server:/ { N; s/^Ltm::Virtual Server: \(.*\)\nAvailability     : \(.*\)$/\1: \2/p; }'
+
+####### Busca obtener este onliner la lista de virtual server en dos columnas: VS:Availability
+
+#### el comando tmsh dendtro del llamado REST acepta expresiones regulares para filtrar el VS pero requerira escapear caracteres especiales
